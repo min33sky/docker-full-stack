@@ -8,7 +8,10 @@ function App() {
   const [value, setValue] = useState('');
 
   useEffect(() => {
-    axios.get('/api/values').then((response) => console.log('response: ', response.data));
+    axios.get('/api/values').then((response) => {
+      console.log('response: ', response.data);
+      setLists(response.data);
+    });
   }, []);
 
   const changeHandler = (e) => {
