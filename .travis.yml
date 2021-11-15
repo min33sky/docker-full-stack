@@ -1,0 +1,25 @@
+language: generic
+
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t min33sky/react-test-app -f ./frontend/Dockerfile.dev ././frontend/Dockerfile.dev
+
+script:
+  - docker run -e CI=true min33sky/react-test-app npm run test
+
+after_success:
+  - docker build -t min33sky/docker-frontend ./frontend
+  - docker build -t min33sky/docker-backend ./backend
+  - docker build -t min33sky/docker-nginx ./nginx
+
+  # 도커허브에 로그인
+  - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
+
+  # 도커허브에 빌드된 이미지들을 Push
+  - docker push min33sky/docker-frontend
+  - docker push min33sky/docker-backend
+  - docker push min33sky/docker-nginx
