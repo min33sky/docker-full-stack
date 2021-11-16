@@ -23,3 +23,16 @@ after_success:
   - docker push min33sky/docker-frontend
   - docker push min33sky/docker-backend
   - docker push min33sky/docker-nginx
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'ap-northeast-2'
+  app: 'docker-fullstack-app'
+  env: 'Dockerfullstackapp-env'
+  bucket_name: elasticbeanstalk-ap-northeast-2-063150789636
+  bucket_path: 'docker-fullstack-app'
+  on:
+    branch: master
+
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
