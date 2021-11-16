@@ -16,13 +16,6 @@
       "memory": 128
     },
     {
-      "name": "frontend",
-      "image": "min33sky/docker-frontend",
-      "hostname": "frontend",
-      "essential": false,
-      "memory": 128
-    },
-    {
       "name": "nginx",
       "image": "min33sky/docker-nginx",
       "hostname": "nginx",
