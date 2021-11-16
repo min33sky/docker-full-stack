@@ -4,6 +4,8 @@ const db = require('./db');
 
 const app = express();
 
+const PORT = process.env.PORT || 5000;
+
 app.use(express.json());
 
 db.pool.query(
@@ -41,6 +43,6 @@ app.post('/api/value', (req, res, next) => {
   );
 });
 
-app.listen(5000, () => {
-  console.log('Server is running on 5000');
+app.listen(PORT, () => {
+  console.log(`Server is running on ${PORT} `);
 });
